@@ -157,6 +157,16 @@
 					"command": "liberty.explorer.refresh",
 					"when": "view == liberty-dev",
 					"group": "navigation@1"
+				},
+				{
+					"command": "liberty.dev.add.project",
+					"when": "explorerResourceIsFolder || view == liberty-dev",
+					"group": "liberty"
+				},
+				{
+					"command": "liberty.dev.remove.project",
+					"when": "explorerResourceIsFolder || view == liberty-dev",
+					"group": "liberty"
 				}
 			],
 			"view/item/context": [
