@@ -21,6 +21,7 @@ import { getGradleTestReport } from "../util/gradleUtil";
 import { pathExists } from "fs-extra";
 import { DashboardData } from "./dashboard";
 import { ProjectStartCmdParam } from "./projectStartCmdParam";
+import path = require("path");
 
 export const terminals: { [libProjectId: number]: LibertyProject } = {};
 
@@ -71,6 +72,41 @@ function showProjects(command: string, callback: Function, reportType?: string):
 // opens pom associated with LibertyProject and starts dev mode
 export async function openProject(pomPath: string): Promise<void> {
     vscode.commands.executeCommand("vscode.open", vscode.Uri.file(pomPath));
+}
+export async function hasPomXmlOrBuildGradle(): Promise<boolean> {
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+
+    if (!workspaceFolders) {
+        // No workspace folders found
+        return false;
+    }
+
+    let hasPomXmlOrBuildGradle = false;
+
+    // Iterate through each workspace folder
+    for (const folder of workspaceFolders) {
+        const folderPath = folder.uri.fsPath;
+
+        // Check if either pom.xml or build.gradle exists in the folder
+        const pomXmlPath = path.join(folderPath, 'pom.xml');
+        const buildGradlePath = path.join(folderPath, 'build.gradle');
+
+        if (fs.existsSync(pomXmlPath) || fs.existsSync(buildGradlePath)) {
+            // Found either pom.xml or build.gradle
+            hasPomXmlOrBuildGradle = true;
+            break;
+        }
+        vscode.commands.executeCommand('setContext', 'myExtension.hasPomXmlOrBuildGradle', true);
+    }
+
+    if (hasPomXmlOrBuildGradle) {
+        // Either pom.xml or build.gradle found
+        return true;
+    } else {
+        // No pom.xml or build.gradle found
+        return false;
+    }
+    
 }
 
 // List all liberty dev commands, triggerred by hotkey only (Shift+Cmd+L)

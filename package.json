@@ -143,12 +143,12 @@
 			"explorer/context": [
 				{
 					"command": "liberty.dev.add.project",
-					"when": "explorerResourceIsRoot",
+					"when": "myExtension.hasPomXmlOrBuildGradle",
 					"group": "liberty"
 				},
 				{
 					"command": "liberty.dev.remove.project",
-					"when": "explorerResourceIsRoot",
+					"when": "myExtension.hasPomXmlOrBuildGradle",
 					"group": "liberty"
 				}
 			],

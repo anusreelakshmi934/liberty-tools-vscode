@@ -122,6 +122,10 @@ function registerCommands(context: ExtensionContext) {
     );
 
     context.subscriptions.push(
+        vscode.commands.registerCommand('myExtension.hasPomXmlOrBuildGradle', () => devCommands.hasPomXmlOrBuildGradle()),
+    );
+    
+    context.subscriptions.push(
         vscode.commands.registerCommand("extension.open.project", (pomPath) => devCommands.openProject(pomPath)),
     );
     context.subscriptions.push(
