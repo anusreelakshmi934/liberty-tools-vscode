@@ -65,5 +65,5 @@ jobs:
           token: ${{ secrets.AUTH_TOKEN }}
           repository: anusreelakshmi934/liberty-tools-intellij
           event-type: trigger-workflow
-          client-payload: '{"ref": "${{ github.ref }}”}'
+          client-payload: '{"ref": "${{ github.ref }}"}'
 
