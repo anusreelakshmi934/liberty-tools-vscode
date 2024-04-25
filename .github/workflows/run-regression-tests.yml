@@ -55,3 +55,15 @@ jobs:
       # Build the plugin.
       - name: 'Test: RunTests'
         run: bash ./src/test/resources/ci/scripts/exec.sh TEST ${{ matrix.targetVSCode }}
+
+  trigger_intellij_workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v3.0.0
+        with:
+          token: ${{ secrets.AUTH_TOKEN }}
+          repository: anusreelakshmi934/liberty-tools-intellij
+          event-type: trigger-workflow
+          client-payload: '{"ref": "${{ github.ref }}”}'
+
