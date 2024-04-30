@@ -1,17 +1,16 @@
-name: Trigger Tests in Another Repository
+name: trigger tests in another repository
 on:
   pull_request:
-    branches:
-      - triggerbuild47
+      types: [opened, synchronize]
+  issues:
+      types: [ opened, edited ]
   workflow_dispatch:
   push:
-    branches:
-      - triggerbuild47
 jobs:
   trigger-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger the automated test in another repo
+      - name: trigger the automated test in another repo
         uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ secrets.REPO_ACCESS }}
