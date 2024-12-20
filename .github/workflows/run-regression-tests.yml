@@ -56,12 +56,17 @@ jobs:
       - name: 'Test: RunTests'
         run: bash ./src/test/resources/ci/scripts/exec.sh TEST ${{ matrix.targetVSCode }}
 
+      - name: Debug: Check screenshot directory
+        run: |
+          echo "Current working directory: $(pwd)"
+          ls -R
+
       # Archive screenshots
       - name: Archive screenshots
         uses: actions/upload-artifact@v3
         with:
           name: liberty-run-tests-screenshots-${{ github.sha }}
-          path: ./**/*.png
-          if-no-files-found: warn
+          path: "**/*.png"
+          if-no-files-found: error
           retention-days: 7
 
