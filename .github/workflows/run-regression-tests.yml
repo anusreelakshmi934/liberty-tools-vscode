@@ -56,7 +56,7 @@ jobs:
       - name: 'Test: RunTests'
         run: bash ./src/test/resources/ci/scripts/exec.sh TEST ${{ matrix.targetVSCode }}
 
-      - name: Debug: Check screenshot directory
+      - name: Check screenshot directory
         run: |
           echo "Current working directory: $(pwd)"
           ls -R
