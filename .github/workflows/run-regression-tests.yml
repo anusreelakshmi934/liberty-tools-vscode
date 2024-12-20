@@ -44,6 +44,7 @@ jobs:
 
       # Archive artifacts
       - name: Archive artifacts
+        if: runner.os == 'linux' && matrix.targetVSCode == 'latest'
         uses: actions/upload-artifact@v3
         with:
           name: liberty-tools-vscode-${{ github.sha }}
@@ -63,3 +64,4 @@ jobs:
           path: ./**/*.png
           if-no-files-found: warn
           retention-days: 7
+
